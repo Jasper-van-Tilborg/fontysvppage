@@ -1,0 +1,148 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: #000000;
+  --color-foreground: #ffffff;
+
+  --font-headline: var(--font-chakra-petch);
+  --font-ui: var(--font-chakra-petch);
+  --font-body: var(--font-inter);
+
+  --spacing-section: 120px;
+  --spacing-page: 80px;
+  --max-width-page: 1280px;
+}
+
+* {
+  box-sizing: border-box;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+*::-webkit-scrollbar {
+  width: 0 !important;
+  height: 0 !important;
+  display: none !important;
+}
+
+html {
+  background: #000000;
+  color: #ffffff;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+}
+
+body {
+  background: #000000;
+  color: #ffffff;
+  font-family: var(--font-inter), sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* ─── Studio collage float animations ─── */
+/* Collage float — all via CSS custom props, no inline shorthand conflict */
+.st-photo {
+  animation-name: var(--st-anim);
+  animation-duration: var(--st-dur);
+  animation-timing-function: ease-in-out;
+  animation-delay: var(--st-dly);
+  animation-iteration-count: infinite;
+  animation-play-state: var(--st-play, running);
+}
+
+@keyframes stFloat1 {
+  0%,100% { translate: 0px 0px;    rotate:  0deg; }
+  30%     { translate: 8px -14px;  rotate:  1.5deg; }
+  70%     { translate: -6px -9px;  rotate: -1deg; }
+}
+@keyframes stFloat2 {
+  0%,100% { translate: 0px 0px;    rotate: 0deg; }
+  25%     { translate: -10px -8px; rotate: -2deg; }
+  60%     { translate: 7px -13px;  rotate:  1deg; }
+}
+@keyframes stFloat3 {
+  0%,100% { translate: 0px 0px;    rotate: 0deg; }
+  40%     { translate: 9px -11px;  rotate:  2deg; }
+  75%     { translate: -5px -15px; rotate: -1.5deg; }
+}
+@keyframes stFloat4 {
+  0%,100% { translate: 0px 0px;    rotate: 0deg; }
+  35%     { translate: -7px -10px; rotate:  1deg; }
+  65%     { translate: 10px -7px;  rotate: -2deg; }
+}
+@keyframes stFloat5 {
+  0%,100% { translate: 0px 0px;    rotate: 0deg; }
+  50%     { translate: 6px -12px;  rotate:  1.5deg; }
+}
+
+/* ─── Hero animations ─── */
+
+@keyframes vpDrawLine {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes vpFadeInText {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes vpLogoFlash {
+  0%   { opacity: 0; clip-path: inset(0 100% 0 0); }
+  7%   { opacity: 1; clip-path: inset(0 98% 0 0); }
+  100% { opacity: 1; clip-path: inset(0 0% 0 0); }
+}
+
+@keyframes vpScanDown {
+  0%   { top: 0;              opacity: 1;   }
+  90%  { top: calc(100% - 4px); opacity: 0.4; }
+  100% { top: 100%;           opacity: 0;   }
+}
+
+@keyframes vpGlitch {
+  0%   { transform: translate(0, 0)       skewX(0deg);    opacity: 0;    }
+  10%  { transform: translate(0, 0)       skewX(0deg);    opacity: 0.14; }
+  25%  { transform: translate(-5px, 2px)  skewX(-1.5deg); opacity: 0.20; }
+  50%  { transform: translate(4px, -3px)  skewX(1deg);    opacity: 0.15; }
+  75%  { transform: translate(-2px, 2px)  skewX(-0.5deg); opacity: 0.08; }
+  90%  { transform: translate(1px, 0)     skewX(0deg);    opacity: 0.03; }
+  100% { transform: translate(0, 0)       skewX(0deg);    opacity: 0;    }
+}
+
+@keyframes vpScrollDot {
+  0%   { opacity: 0;   transform: translateY(-4px); }
+  15%  { opacity: 1;   transform: translateY(0px); }
+  65%  { opacity: 0.7; transform: translateY(10px); }
+  85%  { opacity: 0;   transform: translateY(13px); }
+  100% { opacity: 0;   transform: translateY(-4px); }
+}
+
+@keyframes vpScrollChevron {
+  0%, 100% { opacity: 0;    transform: translateY(-4px); }
+  40%       { opacity: 0.6;  transform: translateY(0px); }
+  70%       { opacity: 0;    transform: translateY(4px); }
+}
+
+@keyframes vpMouseGlow {
+  0%, 100% { border-color: rgba(255,255,255,0.30); }
+  35%       { border-color: rgba(255,255,255,0.55); }
+  70%       { border-color: rgba(255,255,255,0.30); }
+}
+
+@keyframes vpFlicker {
+  0%, 92%, 100% { opacity: 0;     }
+  93%           { opacity: 0.028; }
+  94%           { opacity: 0;     }
+  96%           { opacity: 0.045; }
+  97%           { opacity: 0;     }
+  99%           { opacity: 0.02;  }
+}

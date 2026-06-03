@@ -1,0 +1,92 @@
+{
+  "nav": {
+    "apply": "Apply Now"
+  },
+  "hero": {
+    "headline": "CREATE CONTENT THAT SHAPES THE FUTURE",
+    "subline": "Virtual Production Minor · Fontys · Eindhoven",
+    "cta": "Apply Now"
+  },
+  "about": {
+    "heading": "About this Minor",
+    "body": "Step into a professional Virtual Production studio and create content that doesn't exist yet. You will work alongside filmmakers, technologists, and storytellers to develop the skills that the industry needs next."
+  },
+  "why": {
+    "heading": "Why this Minor",
+    "items": [
+      {
+        "number": "01",
+        "title": "LED Wall",
+        "description": "State-of-the-art 10m × 3.5m studio in Eindhoven"
+      },
+      {
+        "number": "02",
+        "title": "Unreal Engine",
+        "description": "Real-time rendering, camera tracking and immersive worlds"
+      },
+      {
+        "number": "03",
+        "title": "Collaboration",
+        "description": "Work alongside filmmakers, IT professionals, actors and camera operators"
+      },
+      {
+        "number": "04",
+        "title": "Booming Industry",
+        "description": "Step into a fast-growing industry and prepare for the future of filmmaking"
+      }
+    ]
+  },
+  "programme": {
+    "heading": "Programme",
+    "phases": [
+      {
+        "number": "Phase 1",
+        "title": "Courses",
+        "description": "Master the fundamentals through hands-on workshops in Unreal Engine, LED volumes and camera tracking.",
+        "icon": "/graduationcap.svg",
+        "tags": ["Unreal Engine", "LED Volumes", "Camera Tracking"]
+      },
+      {
+        "number": "Phase 2",
+        "title": "Challenges",
+        "description": "Team-based projects where you collaborate across disciplines and experiment with immersive technologies.",
+        "icon": "/trophy.svg",
+        "tags": ["Team Projects", "Experimentation"]
+      },
+      {
+        "number": "Phase 3",
+        "title": "Project",
+        "description": "Work with companies, research teams or creative organizations on a real project in the area of VP that excites you most.",
+        "icon": "/filmslate.svg",
+        "tags": ["Film", "Marketing", "Visualization"]
+      }
+    ]
+  },
+  "studio": {
+    "heading": "The Studio"
+  },
+  "apply": {
+    "heading": "This Minor is for you if",
+    "checklist": [
+      "You have completed your propedeuse",
+      "Basic knowledge of 3D software or video editing",
+      "Affinity with technology and digital production",
+      "A good foundation of the English language"
+    ],
+    "deadlines": {
+      "spring": "Spring Semester",
+      "springStart": "Starts February",
+      "springDay": "16",
+      "springMonth": "NOV",
+      "autumn": "Autumn Semester",
+      "autumnStart": "Starts September",
+      "autumnDay": "1",
+      "autumnMonth": "MAY"
+    },
+    "fontysBtn": "Apply as Fontys Student",
+    "externalBtn": "Apply as External Student",
+    "contact": "Contact",
+    "contactName": "Jan Salge",
+    "contactEmail": "ict-videolab@fontys.nl"
+  }
+}
