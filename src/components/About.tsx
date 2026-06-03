@@ -36,7 +36,7 @@ export default function About() {
   const sectionRef = useRef<HTMLElement>(null);
   const currentP   = useRef(0);
   const targetP    = useRef(0);
-  const rafId      = useRef<number>();
+  const rafId      = useRef<number>(0);
 
   useEffect(() => {
     const calcTarget = () => {

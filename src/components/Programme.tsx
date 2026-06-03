@@ -54,7 +54,7 @@ export default function Programme() {
   const pathRef    = useRef<SVGPathElement>(null);
   const currentP   = useRef(0);
   const targetP    = useRef(0);
-  const rafId      = useRef<number>();
+  const rafId      = useRef<number>(0);
 
   // Smooth scroll progress via RAF lerp
   useEffect(() => {

@@ -38,7 +38,7 @@ export default function Studio() {
   const containerRef = useRef<HTMLDivElement>(null);
   const imgRefs      = useRef<(HTMLDivElement | null)[]>([]);
   const physics      = useRef<PhysicsState[]>([]);
-  const rafId        = useRef<number>();
+  const rafId        = useRef<number>(0);
 
   // Drag state
   const drag = useRef<{
