@@ -29,28 +29,31 @@ const PHASE2_START = 0.80; // when closing shot begins
 
 const SCROLL_MULT  = 6;
 const IMG_W_P1     = 440;  // phase 1 image width
-const IMG_W_P2     = 300;  // phase 2 (closing shot) image width
 
-// Small individual delays within phase 2 — organic stagger
-const P2_DELAYS = [0.00, 0.025, 0.012, 0.038, 0.018, 0.030, 0.006, 0.044, 0.022, 0.010];
-
-// Phase 2 — all images appear at once in a scattered grid
-const CLOSING = [
-  { left: '1%',  top: '2%',  rot: -2   },
-  { left: '26%', top: '0%',  rot:  1.5 },
-  { left: '51%', top: '3%',  rot: -1   },
-  { left: '74%', top: '1%',  rot:  3   },
-  { left: '1%',  top: '36%', rot:  2   },
-  { left: '26%', top: '38%', rot: -2.5 },
-  { left: '51%', top: '37%', rot:  1   },
-  { left: '74%', top: '39%', rot: -1.5 },
-  { left: '15%', top: '70%', rot:  3   },
-  { left: '52%', top: '68%', rot: -1   },
+// Per-image Phase 2 config: delay + duration → big stagger differences
+const P2_CONFIGS = [
+  { delay: 0.00, dur: 0.11 },
+  { delay: 0.06, dur: 0.09 },
+  { delay: 0.02, dur: 0.13 },
+  { delay: 0.09, dur: 0.08 },
+  { delay: 0.01, dur: 0.10 },
+  { delay: 0.07, dur: 0.12 },
+  { delay: 0.04, dur: 0.09 },
+  { delay: 0.10, dur: 0.10 },
+  { delay: 0.03, dur: 0.11 },
+  { delay: 0.08, dur: 0.09 },
 ];
 
-// Ease: smooth out → smooth in
 function easeInOut(t: number) {
   return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+}
+
+// Spring pop: grows to 120% then settles at 100%
+function springPop(t: number): number {
+  if (t <= 0) return 0;
+  if (t >= 1) return 1;
+  if (t < 0.72) return easeInOut(t / 0.72) * 1.20;
+  return 1.20 - ((t - 0.72) / 0.28) * 0.20;
 }
 
 export default function Studio() {
@@ -91,12 +94,18 @@ export default function Studio() {
     };
   }, [vh]);
 
-  // THE STUDIO fill
-  const fillClip = `inset(0 ${(1 - Math.min(1, progress / PHASE2_START)) * 100}% 0 0)`;
+  // THE STUDIO — fill enters left→right; diagonal swipe wipe-out when closing shot starts
+  const TEXT_EXIT_DUR  = 0.08;
+  const textExitP      = Math.max(0, Math.min(1, (progress - PHASE2_START) / TEXT_EXIT_DUR));
+  const fillInP        = Math.min(1, progress / PHASE2_START);
+  const fillClip       = `inset(0 ${(1 - fillInP) * 100}% 0 0)`;
+  // Diagonal wipe: sweeps right→left with ~45° slant
+  const wx_top         = (1 - textExitP) * 160 - 10;  // top-right edge: 150% → -10%
+  const wx_bot         = wx_top - 55;                   // bottom-right edge (creates diagonal)
+  const textWipeClip   = textExitP > 0
+    ? `polygon(0% 0%, ${wx_top}% 0%, ${wx_bot}% 100%, 0% 100%)`
+    : 'none';
 
-  // Phase 2 scale (0 → 1 as progress goes PHASE2_START → 1)
-  const p2Raw   = Math.max(0, Math.min(1, (progress - PHASE2_START) / 0.20));
-  const p2      = easeInOut(p2Raw);
   const inPhase2 = progress >= PHASE2_START - 0.02;
 
   const IMG_H_P1 = Math.round(IMG_W_P1 * 0.67);
@@ -126,7 +135,7 @@ export default function Studio() {
 
           {/* THE STUDIO */}
           <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 10, pointerEvents: 'none', userSelect: 'none' }}>
-            <div style={{ position: 'relative' }}>
+            <div style={{ position: 'relative', clipPath: textWipeClip }}>
               <span style={{ fontFamily: 'var(--font-chakra-petch)', fontWeight: 700, fontSize: 'clamp(9vw, 12vw, 16vw)', letterSpacing: '0.05em', textTransform: 'uppercase', whiteSpace: 'nowrap', visibility: 'hidden', display: 'block' }}>
                 THE STUDIO
               </span>
@@ -168,7 +177,9 @@ export default function Studio() {
                   zIndex: 2,
                   transform: `translateY(${translateY}px) rotate(${cfg.rot}deg)`,
                   opacity: p1opacity,
-                  boxShadow: '0 20px 60px rgba(0,0,0,0.85)',
+                  borderRadius: '10px',
+                  overflow: 'hidden',
+                  boxShadow: '0 24px 64px rgba(0,0,0,0.9), 0 4px 16px rgba(0,0,0,0.5)',
                   willChange: 'transform, opacity',
                 }}
               >
@@ -177,36 +188,54 @@ export default function Studio() {
             );
           })}
 
-          {/* ── Phase 2: all images scale in together ── */}
-          {inPhase2 && CFGS.map((cfg, i) => {
-            const imgP2Raw  = Math.max(0, Math.min(1, (progress - PHASE2_START - P2_DELAYS[i]) / 0.20));
-            const imgP2     = easeInOut(imgP2Raw);
-            const scale     = 0.88 + imgP2 * 0.12;
-            const translateY = (1 - imgP2) * 28;
-            const opacity   = imgP2;
-            const pos     = CLOSING[i];
-
-            return (
-              <div
-                key={`p2-${cfg.src}`}
-                style={{
-                  position: 'absolute',
-                  left: pos.left,
-                  top: pos.top,
-                  width: IMG_W_P2,
-                  zIndex: 3,
-                  transform: `translateY(${translateY}px) rotate(${pos.rot}deg) scale(${scale})`,
-                  transformOrigin: 'center center',
-                  opacity,
-                  filter: 'none',
-                  boxShadow: '0 16px 50px rgba(0,0,0,0.8)',
-                  willChange: 'transform, opacity, filter',
-                }}
-              >
-                <Image src={cfg.src} alt={`VP studio ${i + 1}`} width={IMG_W_P2} height={Math.round(IMG_W_P2 * 0.67)} style={{ width: '100%', height: 'auto', display: 'block' }} />
+          {/* ── Phase 2: closing shot — grid aligned to page layout ── */}
+          {inPhase2 && (
+            <div style={{
+              position: 'absolute', inset: 0, zIndex: 3,
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+            }}>
+              <div style={{
+                width: '100%',
+                maxWidth: '1280px',
+                padding: '0 80px',
+                display: 'grid',
+                gridTemplateColumns: 'repeat(5, 1fr)',
+                gridTemplateRows: 'repeat(2, 38vh)',
+                gap: '8px',
+              }}>
+                {CFGS.map((cfg, i) => {
+                  const { delay, dur } = P2_CONFIGS[i];
+                  const imgP2Raw = Math.max(0, Math.min(1, (progress - PHASE2_START - delay) / dur));
+                  const scale    = springPop(imgP2Raw);
+                  const opacity  = Math.min(1, imgP2Raw * 6);
+                  return (
+                    <div
+                      key={`p2-${cfg.src}`}
+                      style={{
+                        position: 'relative',
+                        overflow: 'hidden',
+                        borderRadius: '10px',
+                        transform: `scale(${scale})`,
+                        transformOrigin: 'center center',
+                        opacity,
+                        boxShadow: '0 16px 48px rgba(0,0,0,0.8), 0 2px 8px rgba(0,0,0,0.4)',
+                        outline: '1px solid rgba(255,255,255,0.06)',
+                        willChange: 'transform, opacity',
+                      }}
+                    >
+                      <Image src={cfg.src} alt={`VP studio ${i + 1}`} fill style={{ objectFit: 'cover' }} />
+                      {/* subtle bottom vignette for editorial depth */}
+                      <div style={{
+                        position: 'absolute', inset: 0,
+                        background: 'linear-gradient(to top, rgba(0,0,0,0.28) 0%, transparent 55%)',
+                        pointerEvents: 'none',
+                      }} />
+                    </div>
+                  );
+                })}
               </div>
-            );
-          })}
+            </div>
+          )}
 
         </div>
       </div>
