@@ -108,7 +108,49 @@ export default function Programme() {
   const dashOffset = pathLen * (1 - progress);
 
   return (
-    <div ref={wrapperRef} style={{ height: `${(SCROLL_MULT + EXTRA_HOLD) * 100}vh` }}>
+    <>
+    {/* ── Mobile layout ── */}
+    <div className="block md:hidden bg-black py-16 px-5">
+      <h2 style={{
+        textAlign: 'center', marginBottom: '48px',
+        fontFamily: 'var(--font-chakra-petch)', fontWeight: 700,
+        fontSize: 'clamp(1.8rem, 8vw, 3rem)', letterSpacing: '0.04em',
+        color: '#fff', textTransform: 'uppercase',
+      }}>
+        {t('heading')}
+      </h2>
+      {phases.map((phase, i) => (
+        <div key={i} style={{
+          borderTop: i === 0 ? 'none' : '1px solid rgba(255,255,255,0.1)',
+          paddingTop: i === 0 ? '0' : '32px',
+          paddingBottom: '32px',
+          display: 'flex', flexDirection: 'column', gap: '14px',
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+            <Image src={phase.icon} alt={phase.title} width={40} height={40} style={{ opacity: 0.9 }} />
+            <p style={{ fontFamily: 'var(--font-chakra-petch)', fontSize: '0.78rem', color: 'rgba(255,255,255,0.45)', letterSpacing: '0.05em' }}>
+              {phase.number}
+            </p>
+          </div>
+          <h3 style={{ fontFamily: 'var(--font-chakra-petch)', fontWeight: 700, fontSize: '1.3rem', letterSpacing: '0.02em', color: '#fff', lineHeight: 1.1 }}>
+            {phase.title}
+          </h3>
+          <p style={{ fontFamily: 'var(--font-inter)', fontSize: '0.875rem', lineHeight: 1.7, color: 'rgba(255,255,255,0.55)' }}>
+            {phase.description}
+          </p>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+            {phase.tags.map(tag => (
+              <span key={tag} style={{ fontFamily: 'var(--font-chakra-petch)', fontSize: '0.68rem', letterSpacing: '0.1em', color: 'rgba(255,255,255,0.55)', border: '1px solid rgba(255,255,255,0.2)', padding: '5px 12px', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+
+    {/* ── Desktop layout (unchanged) ── */}
+    <div ref={wrapperRef} className="hidden md:block" style={{ height: `${(SCROLL_MULT + EXTRA_HOLD) * 100}vh` }}>
       <div style={{
         position: 'sticky', top: 0, height: '100vh',
         background: '#000', display: 'flex', flexDirection: 'column',
@@ -139,7 +181,7 @@ export default function Programme() {
               ref={pathRef}
               d={topPath}
               stroke="#5b99bd"
-              strokeWidth="1"
+              strokeWidth="4"
               fill="none"
               strokeDasharray={pathLen}
               strokeDashoffset={dashOffset}
@@ -148,7 +190,7 @@ export default function Programme() {
             <path
               d={bottomPath}
               stroke="#5b99bd"
-              strokeWidth="1"
+              strokeWidth="4"
               fill="none"
               strokeDasharray={pathLen}
               strokeDashoffset={dashOffset}
@@ -211,5 +253,6 @@ export default function Programme() {
         </div>
       </div>
     </div>
+    </>
   );
 }

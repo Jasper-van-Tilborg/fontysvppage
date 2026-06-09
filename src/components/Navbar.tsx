@@ -24,7 +24,7 @@ export default function Navbar() {
 
   return (
     <nav
-      className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-[80px] py-6"
+      className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-5 md:px-[80px] py-6"
       style={{
         opacity: visible ? 1 : 0,
         transform: visible ? 'translateY(0)' : 'translateY(-6px)',

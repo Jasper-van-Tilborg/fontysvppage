@@ -146,3 +146,9 @@ body {
   97%           { opacity: 0;     }
   99%           { opacity: 0.02;  }
 }
+
+/* ─── Responsive LED wall inset ─── */
+.vp-led-inset { inset: 16px; }
+@media (min-width: 768px) {
+  .vp-led-inset { inset: 40px; }
+}

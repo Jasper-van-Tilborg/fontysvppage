@@ -186,7 +186,7 @@ export default function Hero() {
       <BlueprintSVG active={showBlueprint} />
 
       {/* ── LED wall inner area (clipped) ── */}
-      <div className="absolute overflow-hidden" style={{ inset: '40px' }}>
+      <div className="absolute overflow-hidden vp-led-inset">
 
         {/* Pixel grid */}
         <div
@@ -301,7 +301,7 @@ export default function Hero() {
         {showLogo && (
           <>
             {/* Logo + headline + subline — vertically centered */}
-            <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-16">
+            <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-8 md:px-16">
 
               {/* Logo */}
               <div style={{
@@ -415,9 +415,8 @@ export default function Hero() {
       {/* ── LED wall border frame (outside overflow:hidden) ── */}
       <div
         aria-hidden
-        className="absolute pointer-events-none"
+        className="absolute pointer-events-none vp-led-inset"
         style={{
-          inset: '40px',
           opacity: isOff || isPowering ? 0.07 : showBorder ? 1 : 0,
           transition: 'opacity 500ms ease',
         }}

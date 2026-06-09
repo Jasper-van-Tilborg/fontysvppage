@@ -11,31 +11,28 @@ export default function Apply() {
   return (
     <section
       id="apply"
+      className="py-16 md:py-[100px] px-5 md:px-[80px]"
       style={{
         background: '#000',
-        padding: '100px 80px',
         borderTop: '1px solid rgba(255,255,255,0.08)',
       }}
     >
       {/* Section label */}
-      <p style={{
-        fontFamily: 'var(--font-chakra-petch)',
-        fontSize: '10px',
-        letterSpacing: '0.35em',
-        color: 'rgba(255,255,255,0.4)',
-        textTransform: 'uppercase',
-        marginBottom: '64px',
-      }}>
+      <p
+        className="mb-10 md:mb-[64px]"
+        style={{
+          fontFamily: 'var(--font-chakra-petch)',
+          fontSize: '10px',
+          letterSpacing: '0.35em',
+          color: 'rgba(255,255,255,0.4)',
+          textTransform: 'uppercase',
+        }}
+      >
         06 — Apply
       </p>
 
       {/* Two-column layout */}
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: '1fr 1fr',
-        gap: '80px',
-        alignItems: 'start',
-      }}>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-[80px] items-start">
 
         {/* LEFT — This Minor is for you if */}
         <div>
@@ -107,7 +104,7 @@ export default function Apply() {
           </p>
 
           {/* Deadline boxes + buttons side by side */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', alignItems: 'stretch', marginBottom: '32px' }}>
+          <div className="grid grid-cols-2 gap-5 mb-8">
 
             {/* Deadline boxes stacked */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
@@ -207,13 +204,10 @@ export default function Apply() {
           </div>
 
           {/* Contact */}
-          <div style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            paddingTop: '24px',
-            borderTop: '1px solid rgba(255,255,255,0.08)',
-          }}>
+          <div
+            className="flex flex-col gap-2 pt-6 md:flex-row md:justify-between md:items-center"
+            style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}
+          >
             <p style={{
               fontFamily: 'var(--font-inter)',
               fontSize: '0.8rem',
