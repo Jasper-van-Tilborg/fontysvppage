@@ -9,7 +9,12 @@
   },
   "about": {
     "heading": "About this Minor",
-    "body": "Step into a professional Virtual Production studio and create content that doesn't exist yet. You will work alongside filmmakers, technologists, and storytellers to develop the skills that the industry needs next."
+    "body": "Step into a professional Virtual Production studio and create content that doesn't exist yet. You will work alongside filmmakers, technologists, and storytellers to develop the skills that the industry needs next.",
+    "stats": [
+      { "value": "20", "label": "Weeks intensive minor" },
+      { "value": "3", "label": "Learning phases" },
+      { "value": "100%", "label": "Hands-on projects" }
+    ]
   },
   "why": {
     "heading": "Why this Minor",
@@ -83,6 +88,7 @@
       "autumnDay": "1",
       "autumnMonth": "MAY"
     },
+    "deadlineLabel": "Application deadline",
     "fontysBtn": "Apply as Fontys Student",
     "externalBtn": "Apply as External Student",
     "contact": "Contact",

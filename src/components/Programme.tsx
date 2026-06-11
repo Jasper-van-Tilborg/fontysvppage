@@ -97,6 +97,7 @@ export default function Programme() {
 
   // Per-element reveal: icon + text fade in as the "pen" reaches them
   const revealAt = (centerX: number) => {
+    if (svgW <= 0) return 0;
     const f      = centerX / svgW;
     const startP = f * 0.5;
     const endP   = startP + 0.35;

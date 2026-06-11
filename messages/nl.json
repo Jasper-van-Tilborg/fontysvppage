@@ -9,7 +9,12 @@
   },
   "about": {
     "heading": "Over deze Minor",
-    "body": "Stap een professionele Virtual Production studio binnen en maak content die nog niet bestaat. Je werkt samen met filmmakers, technologen en verhalenvertellers om de vaardigheden te ontwikkelen die de industrie als volgende nodig heeft."
+    "body": "Stap een professionele Virtual Production studio binnen en maak content die nog niet bestaat. Je werkt samen met filmmakers, technologen en verhalenvertellers om de vaardigheden te ontwikkelen die de industrie als volgende nodig heeft.",
+    "stats": [
+      { "value": "20", "label": "Weken intensieve minor" },
+      { "value": "3", "label": "Leerfases" },
+      { "value": "100%", "label": "Hands-on projecten" }
+    ]
   },
   "why": {
     "heading": "Waarom deze Minor",
@@ -83,6 +88,7 @@
       "autumnDay": "1",
       "autumnMonth": "MEI"
     },
+    "deadlineLabel": "Aanmelddeadline",
     "fontysBtn": "Aanmelden als Fontys Student",
     "externalBtn": "Aanmelden als Externe Student",
     "contact": "Contact",

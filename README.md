@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Fontys Virtual Production Minor - Website
 
-## Getting Started
+Dit is de promo-website voor de Virtual Production minor van Fontys in Eindhoven. De site legt uit wat de minor inhoudt, wat je leert en hoe je je kan aanmelden.
 
-First, run the development server:
+## Wat zit erin?
+
+De pagina bestaat uit een paar secties die je gewoon van boven naar beneden scrollt:
+
+1. **Hero** – intro met logo en een korte animatie
+2. **About** – wie zijn wij en wat doen we
+3. **Why** – waarom je voor deze minor zou kiezen
+4. **Programme** – het lesprogramma, in een horizontale tijdlijn
+5. **Studio** – foto's van de studio
+6. **Apply** – hoe je je aanmeldt en de deadlines
+
+De site is beschikbaar in het **Nederlands** en **Engels** (rechtsboven kun je wisselen).
+
+## Live
+
+De website staat live op Vercel: [fontysvppage.vercel.app](https://fontysvppage.vercel.app)
+
+## Hoe start je dit lokaal?
+
+Zorg dat je Node.js geïnstalleerd hebt, installeer dan de packages en start de dev-server:
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Ga daarna naar [http://localhost:3000](http://localhost:3000) in je browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Gebouwd met
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Next.js** – het framework
+- **Tailwind CSS** – voor de styling
+- **next-intl** – voor de NL/EN vertalingen
 
-## Learn More
+## Vertalingen aanpassen
 
-To learn more about Next.js, take a look at the following resources:
+Alle teksten staan in:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `messages/nl.json` (Nederlands)
+- `messages/en.json` (Engels)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Pas je hier een tekst aan, doe dat dan in beide bestanden zodat de vertaling klopt.

@@ -1,6 +1,8 @@
 'use client';
 
+import { useEffect, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
+import type { CSSProperties } from 'react';
 
 export default function Apply() {
   const t = useTranslations('apply');
@@ -8,8 +10,34 @@ export default function Apply() {
   const checklist = t.raw('checklist') as string[];
   const dl = t.raw('deadlines') as Record<string, string>;
 
+  const [visible, setVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.15 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  const reveal = (delay = 0): CSSProperties => ({
+    opacity: visible ? 1 : 0,
+    transform: visible ? 'translateY(0)' : 'translateY(24px)',
+    transition: `opacity 0.7s ease ${delay}s, transform 0.7s ease ${delay}s`,
+  });
+
   return (
     <section
+      ref={sectionRef}
       id="apply"
       className="py-16 md:py-[100px] px-5 md:px-[80px]"
       style={{
@@ -26,6 +54,7 @@ export default function Apply() {
           letterSpacing: '0.35em',
           color: 'rgba(255,255,255,0.4)',
           textTransform: 'uppercase',
+          ...reveal(0),
         }}
       >
         06 — Apply
@@ -44,13 +73,14 @@ export default function Apply() {
             color: '#fff',
             lineHeight: 1.15,
             marginBottom: '48px',
+            ...reveal(0.1),
           }}>
             {t('heading')}
           </h2>
 
           <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '20px' }}>
             {checklist.map((item, i) => (
-              <li key={i} style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+              <li key={i} style={{ display: 'flex', alignItems: 'center', gap: '20px', ...reveal(0.15 + i * 0.05) }}>
                 {/* Checkbox */}
                 <span style={{
                   flexShrink: 0,
@@ -88,6 +118,7 @@ export default function Apply() {
             color: '#fff',
             lineHeight: 1.15,
             marginBottom: '32px',
+            ...reveal(0.1),
           }}>
             Apply
           </h2>
@@ -99,12 +130,13 @@ export default function Apply() {
             color: 'rgba(255,255,255,0.4)',
             textTransform: 'uppercase',
             marginBottom: '16px',
+            ...reveal(0.2),
           }}>
             Deadlines
           </p>
 
           {/* Deadline boxes + buttons side by side */}
-          <div className="grid grid-cols-2 gap-5 mb-8">
+          <div className="grid grid-cols-2 gap-5 mb-8" style={reveal(0.3)}>
 
             {/* Deadline boxes stacked */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
@@ -206,7 +238,7 @@ export default function Apply() {
           {/* Contact */}
           <div
             className="flex flex-col gap-2 pt-6 md:flex-row md:justify-between md:items-center"
-            style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}
+            style={{ borderTop: '1px solid rgba(255,255,255,0.08)', ...reveal(0.4) }}
           >
             <p style={{
               fontFamily: 'var(--font-inter)',
